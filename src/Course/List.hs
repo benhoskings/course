@@ -156,8 +156,8 @@ filter f l = foldRight (\a -> if f a then (a:.) else id) Nil l
   List a
   -> List a
   -> List a
-(++) =
-  error "todo"
+(++) Nil Nil = Nil
+(++) (h :. t) l2 = (h :. (t ++ l2))
 
 infixr 5 ++
 
