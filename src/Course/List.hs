@@ -71,8 +71,8 @@ headOr ::
   a
   -> List a
   -> a
-headOr =
-  error "todo"
+headOr a Nil = a
+headOr _ (h :. _) = h
 
 -- | The product of the elements of a list.
 --
@@ -84,8 +84,8 @@ headOr =
 product ::
   List Int
   -> Int
-product =
-  error "todo"
+product Nil = 1
+product (h :. t) = h * (product t)
 
 -- | Sum the elements of the list.
 --
@@ -99,8 +99,8 @@ product =
 sum ::
   List Int
   -> Int
-sum =
-  error "todo"
+sum Nil = 0
+sum (h :. t) = h + (sum t)
 
 -- | Return the length of the list.
 --
@@ -111,8 +111,8 @@ sum =
 length ::
   List a
   -> Int
-length =
-  error "todo"
+length Nil = 0
+length (h :. t) = 1 + (length t)
 
 -- | Map the given function on each element of the list.
 --
@@ -126,8 +126,8 @@ map ::
   (a -> b)
   -> List a
   -> List b
-map =
-  error "todo"
+map _ Nil = Nil
+map f (h :. t) = (f h) :. (map f t)
 
 -- | Return elements satisfying the given predicate.
 --
@@ -202,7 +202,7 @@ flatMap =
 
 -- | Convert a list of optional values to an optional list of values.
 --
--- * If the list contains all `Full` values, 
+-- * If the list contains all `Full` values,
 -- then return `Full` list of values.
 --
 -- * If the list contains one or more `Empty` values,
