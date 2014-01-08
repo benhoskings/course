@@ -108,7 +108,7 @@ sum = foldRight (+) 0
 length ::
   List a
   -> Int
-length = foldRight (\ b -> b + 1) 0
+length = foldRight (const (+1)) 0
 
 -- | Map the given function on each element of the list.
 --
@@ -122,7 +122,7 @@ map ::
   (a -> b)
   -> List a
   -> List b
-map f = foldRight (\a -> (:.)(f a)) Nil
+map f = foldRight ((:.) . f) Nil
 
 -- | Return elements satisfying the given predicate.
 --
