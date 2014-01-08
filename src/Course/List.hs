@@ -156,8 +156,7 @@ filter f l = foldRight (\a -> if f a then (a:.) else id) Nil l
   List a
   -> List a
   -> List a
-(++) Nil Nil = Nil
-(++) (h :. t) l2 = (h :. (t ++ l2))
+(++) l1 l2 = foldRight (:.) l2 l1
 
 infixr 5 ++
 
