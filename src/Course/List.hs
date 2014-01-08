@@ -173,8 +173,7 @@ infixr 5 ++
 flatten ::
   List (List a)
   -> List a
-flatten =
-  error "todo"
+flatten = foldRight (++) Nil
 
 -- | Map a function then flatten to a list.
 --
