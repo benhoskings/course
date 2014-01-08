@@ -138,11 +138,7 @@ filter ::
   (a -> Bool)
   -> List a
   -> List a
-filter f Nil = Nil
-filter f (h :. t) = let connector = case f h of
-                                      True -> ((:.) h)
-                                      False -> id
-                    in connector (filter f t)
+filter f l = foldRight (\a -> if f a then (a:.) else id) Nil l
 
 -- | Append two lists to a new list.
 --
