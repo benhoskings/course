@@ -71,8 +71,7 @@ headOr ::
   a
   -> List a
   -> a
-headOr a Nil = a
-headOr _ (h :. _) = h
+headOr = foldRight const
 
 -- | The product of the elements of a list.
 --
@@ -84,8 +83,7 @@ headOr _ (h :. _) = h
 product ::
   List Int
   -> Int
-product Nil = 1
-product (h :. t) = h * (product t)
+product = foldRight (*) 1
 
 -- | Sum the elements of the list.
 --
@@ -99,8 +97,7 @@ product (h :. t) = h * (product t)
 sum ::
   List Int
   -> Int
-sum Nil = 0
-sum (h :. t) = h + (sum t)
+sum = foldRight (+) 0
 
 -- | Return the length of the list.
 --
@@ -111,8 +108,7 @@ sum (h :. t) = h + (sum t)
 length ::
   List a
   -> Int
-length Nil = 0
-length (h :. t) = 1 + (length t)
+length = foldRight (\ b -> b + 1) 0
 
 -- | Map the given function on each element of the list.
 --
@@ -126,8 +122,7 @@ map ::
   (a -> b)
   -> List a
   -> List b
-map _ Nil = Nil
-map f (h :. t) = (f h) :. (map f t)
+map f = foldRight (\a -> (:.)(f a)) Nil
 
 -- | Return elements satisfying the given predicate.
 --
