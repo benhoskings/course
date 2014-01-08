@@ -138,8 +138,11 @@ filter ::
   (a -> Bool)
   -> List a
   -> List a
-filter =
-  error "todo"
+filter f Nil = Nil
+filter f (h :. t) = let connector = case f h of
+                                      True -> ((:.) h)
+                                      False -> id
+                    in connector (filter f t)
 
 -- | Append two lists to a new list.
 --
