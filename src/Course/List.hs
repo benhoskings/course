@@ -244,8 +244,8 @@ find ::
   (a -> Bool)
   -> List a
   -> Optional a
-find =
-  error "todo"
+-- TODO: This is... odd.
+find f l = foldRight const Empty (map Full (filter f l))
 
 -- | Determine if the length of the given list is greater than 4.
 --
