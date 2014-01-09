@@ -189,8 +189,7 @@ flatMap ::
   (a -> List b)
   -> List a
   -> List b
-flatMap =
-  error "todo"
+flatMap f = foldRight ((++) . f) Nil
 
 -- | Convert a list of optional values to an optional list of values.
 --
