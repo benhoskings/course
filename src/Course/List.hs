@@ -219,10 +219,7 @@ seqOptional ::
 -- TODO: This is crap.
 seqOptional Nil = (Full Nil)
 seqOptional (Empty :. _) = Empty
-seqOptional ((Full a) :. t) = let tailResult = seqOptional t
-                              in case tailResult of
-                                Empty -> Empty
-                                Full b -> Full (a :. b)
+seqOptional ((Full a) :. t) = mapOptional (a:.) (seqOptional t)
 
 -- | Find the first element in the list matching the predicate.
 --
