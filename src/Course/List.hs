@@ -216,10 +216,7 @@ flatMap f = foldRight ((++) . f) Nil
 seqOptional ::
   List (Optional a)
   -> Optional (List a)
--- TODO: This is crap.
-seqOptional Nil = (Full Nil)
-seqOptional (Empty :. _) = Empty
-seqOptional ((Full a) :. t) = mapOptional (a:.) (seqOptional t)
+seqOptional = foldRight (\a -> \b -> bindOptional (\c -> (mapOptional (\d -> c :. d) b)) a) (Full Nil)
 
 -- | Find the first element in the list matching the predicate.
 --
